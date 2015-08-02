@@ -64,13 +64,14 @@ input{
     height: 80px;
     margin-top: 35px;
     padding-top: 15px;
-    margin-bottom: 35px;
+    margin-bottom: 10px;
 
 
 }
 .boton-felling{
     display: inline-block;
-    width: 10%;
+    margin: 5px;
+    width: 9%;
 }
 .logo_abajo img{
     height: 80px;
