@@ -1,0 +1,75 @@
+.logoPrincipal{
+background-image:url(../img/UNlogo.png) 
+
+}
+.ContenedorPrincipal{
+   width: 50%;
+
+   background-color: black;
+    vertical-align: bottom;
+}
+input{
+    
+    text-align: center;
+    border-top-right-radius: 3em 3em;
+    border-bottom-right-radius: 3em 3em;
+    background-color: black;
+}
+.logi{
+    margin-top: 10px;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+.ali-reg{
+
+    text-align: center;
+    width: 100%;
+}
+.ali-reg h1{
+  color: black;    
+}
+.reginp img{
+    margin-top: 50px;
+ display:inline-block;
+ width: 80%;
+ float:left;
+
+}
+.reginp{
+    color: white;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 15px;
+   
+}
+.reginp input{
+    color:white;
+}
+.reginp h1{
+    color: black;
+}
+.reginpch{
+    float:left;
+    width: 50%;
+    padding-right: 20px;
+  margin-bottom: 25px;
+    
+}
+.reginpch input{
+
+}
+@media (min-width: 1200px){
+.reginp{width: 30%;
+}
+
+}
+@media (max-width:768px){
+.reginp{width: 70%;
+    }
+}
+@media (min-width:768px){
+    .reginp{width:50%;}
+
+}
