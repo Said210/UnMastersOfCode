@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "oauth" => "test#oauth"
   post "shoppingcart" => "test#shopping_cart"
   get "cartcallback" => "test#cart_callback"
+  get "pay" => "test#pay", as: :dashboard
   post "cartpostback" => "test#postback"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

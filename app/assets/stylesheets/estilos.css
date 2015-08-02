@@ -2,8 +2,10 @@
     min-height: 75%;
     background-color: #000;
     width: 40%;
-    margin-left: 30%;
+    left: 30%;
     margin-top: 25%;
+    position: absolute;
+    bottom: 0px;
 }
 
 .line img{
@@ -18,13 +20,60 @@
    background-color: black;
     vertical-align: bottom;
 }
+
+.title{
+    font-size: 15rem;
+    font-family: "Raleway";
+    font-weight: 100;
+    display: inline-block;
+    padding-top: 10px;
+}
+
+@media (max-width:768px){
+    .line img{
+        margin-left: 20%;
+    }
+}
+
 input{
-    
     text-align: center;
     border-top-right-radius: 3em 3em;
     border-bottom-right-radius: 3em 3em;
     background-color: black;
+    width: 100%;
+    height: 3.5rem;
+    font-size: 2rem;
+    border: 0px solid #fff;
+    color: #fff;
 }
+input[type=submit]{
+    border-bottom: 0px solid #333;
+    background-color: transparent;
+    color: #222;
+    cursor: pointer;
+    transition: all .1s;
+}
+
+input[type=submit]:hover{
+    border-bottom: 2px solid #333;
+    border-radius: 0px;
+    transition: all .1s;
+}
+
+.white_un{
+    background-color: #000;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    left: calc(50% - 25px);
+}
+.white_un img{
+    width: 60%;
+    margin-left: 17%;
+    margin-top: 15%;
+}
+
 .logi{
     margin-top: 10px;
     color: white;
@@ -66,20 +115,4 @@ input{
     padding-right: 20px;
   margin-bottom: 25px;
     
-}
-.reginpch input{
-
-}
-@media (min-width: 1200px){
-.reginp{width: 30%;
-}
-
-}
-@media (max-width:768px){
-.reginp{width: 70%;
-    }
-}
-@media (min-width:768px){
-    .reginp{width:50%;}
-
 }

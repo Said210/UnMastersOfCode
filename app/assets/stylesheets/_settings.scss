@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,100,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,100,700);
+
 @font-face {  
     font-family: 'Dekar';  
     src: url('/assets/fonts/Dekar Light.otf') format('otf');  
@@ -15,5 +18,5 @@ html, body, .container{
 	width: 100%;
 }
 h1, h2, h3{
-	font-family: "Dekar", "helvetica";
+	font-family: 'Dekar', 'Raleway', 'Lato', 'helvetica' !important;
 }

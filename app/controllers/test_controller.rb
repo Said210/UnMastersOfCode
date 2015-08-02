@@ -6,8 +6,13 @@ class TestController < ApplicationController
 	after_action :save_session_data
 	rescue_from RuntimeError, with: :set_error_message
 	skip_before_action :verify_authenticity_token, only: [:shopping_cart, :postback]
+	before_action :authenticate_user!
 	def index
 	end
+
+	def pay
+	end
+
 	def generate_private_key
 		OpenSSL::PKCS12.new(File.open(@data.keystore_path),@data.keystore_password).key
 	end
@@ -20,8 +25,21 @@ class TestController < ApplicationController
 		@data.accepted_cards = "master,amex,diners,discover,maestro,visa"
 		get_request_token
 		post_shopping_cart
+		@data.shopping_cart.shoppingCartItem.each do |item|
+			Rails.logger.debug item.to_yaml
+			s = Sale.new
+	    	s.desc = item.description
+	    	s.value = item.value
+	    	s.quantity = item.quantity
+	    	s.userId = current_user.id
+	    	s.save
+	    end
 	end
 	def cart_callback
+		
+	 	Rails.logger.debug "\n\n\n----------------------------------"
+	 	Rails.logger.debug @data.shopping_cart
+	 	Rails.logger.debug "\n\n\n-----------------------------------"
 		@data.request_token_response = @service.get_request_token(@data.request_url, @data.callback_domain)
 		@data.request_token = @data.request_token_response.oauth_token
 		handle_oauth_callback
@@ -86,8 +104,10 @@ class TestController < ApplicationController
 				'
 		@data.shopping_cart_request = ShoppingCartRequest.from_xml(file)
 		@data.shopping_cart = @data.shopping_cart_request.shoppingCart
-		@data.shopping_cart.shoppingCartItem[0].description = params[:desc]
-		@data.shopping_cart.shoppingCartItem[0].value = params[:value]
+		if !params[:desc].nil?
+			@data.shopping_cart.shoppingCartItem[0].description = params[:desc]
+			@data.shopping_cart.shoppingCartItem[0].value = params[:value]
+		end
 		@data.shopping_cart.shoppingCartItem.each do |i|
 			i.description = i.description[0..99] if i.description.length > 100
 			i.description = i.description[0..98] if i.description.last == "&"
@@ -133,14 +153,6 @@ class TestController < ApplicationController
 
 		Rails.logger.debug @data.checkout.to_yaml
 		
-		shopping_cart.shoppingCartItem.each do |item|
-			Rails.logger.debug item.to_yaml
-			s = Sale.new
-	    	s.desc = item.description
-	    	s.value = item.value
-	    	s.quantity = item.quantity
-	    	s.save
-	    end
 		
 		Rails.logger.debug @data.to_yaml
 		merchant_transaction = MerchantTransaction.new(@data.checkout_identifier, @data.consumer_key, "USD", order_amount, Time.now, "Success", approval_code, @data.precheckout_transaction_id)

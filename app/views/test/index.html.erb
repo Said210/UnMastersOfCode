@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	
 	<!-- <form action="/oauth" method="GET">
 		<input type="text" name="desc" placeholder="Donde Estas">
 		<input type="text" name="value" placeholder="Precio">
 		<input type="submit" value="Enviar">
 	</form> -->
 
-	<h1>HOLA</h1>
-	<div class="container">
-	    
-	    <div class="line">
-			<%= image_tag("UNlogo.png") %>
-	    </div>
+<div class="container">
+	<% if !user_signed_in? %>
+		<sub><%= link_to('Login', new_user_session_path)  %> &nbsp;|&nbsp;<%= link_to('Register', new_user_registration_path)  %></sub>
+	<% else %>
+		<sub><%= link_to current_user.email, dashboard_path %>&nbsp;|&nbsp;<%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </sub>
+	<% end %>
+    <div class="line">
+		<%= image_tag("UNlogo.png") %>
+    </div>
 
-	</div>
-
-</body>
-</html>
+</div>
