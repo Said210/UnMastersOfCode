@@ -30,6 +30,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 
+gem 'pearson', '~> 1.0'
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -63,10 +63,31 @@ class TestController < ApplicationController
 		session['data'] = @data
 	end
 	def post_shopping_cart
-		Rails.logger.debug "HOLA REQUEST––––––––––––––––––––––––––––––"
+		#Rails.logger.debug "HOLA REQUEST––––––––––––––––––––––––––––––"
 		file = File.read(File.join('resources', 'shoppingCart.xml'))
+
+		Rails.logger.debug file
+		file = '<?xml version="1.0"?>
+					<ShoppingCartRequest>
+					  <OAuthToken></OAuthToken>
+					  <ShoppingCart>
+					    <CurrencyCode>USD</CurrencyCode>
+					    <Subtotal>100</Subtotal>
+					    
+					    <ShoppingCartItem>
+					      <Description>XBox 360</Description>
+					      <Quantity>1</Quantity>
+					      <Value>299</Value>
+					      <ImageURL>http://projectabc.com/images/xbox.jpg</ImageURL>
+					    </ShoppingCartItem>
+					    
+					  </ShoppingCart>
+					</ShoppingCartRequest>
+				'
 		@data.shopping_cart_request = ShoppingCartRequest.from_xml(file)
 		@data.shopping_cart = @data.shopping_cart_request.shoppingCart
+		@data.shopping_cart.shoppingCartItem[0].description = params[:desc]
+		@data.shopping_cart.shoppingCartItem[0].value = params[:value]
 		@data.shopping_cart.shoppingCartItem.each do |i|
 			i.description = i.description[0..99] if i.description.length > 100
 			i.description = i.description[0..98] if i.description.last == "&"
@@ -111,7 +132,16 @@ class TestController < ApplicationController
 		merchant_transactions = MerchantTransactions.new
 
 		Rails.logger.debug @data.checkout.to_yaml
-
+		
+		shopping_cart.shoppingCartItem.each do |item|
+			Rails.logger.debug item.to_yaml
+			s = Sale.new
+	    	s.desc = item.description
+	    	s.value = item.value
+	    	s.quantity = item.quantity
+	    	s.save
+	    end
+		
 		Rails.logger.debug @data.to_yaml
 		merchant_transaction = MerchantTransaction.new(@data.checkout_identifier, @data.consumer_key, "USD", order_amount, Time.now, "Success", approval_code, @data.precheckout_transaction_id)
 		merchant_transactions << merchant_transaction
@@ -127,6 +157,7 @@ class TestController < ApplicationController
     
     # XPath.first(response_xml, "//MerchantTransactions/*[not(root)]").name = "MerchantTransaction"
     # MerchantInitializationResponse.from_xml(response_xml.to_s)
+
     save_connection_header
 end
   def save_connection_header

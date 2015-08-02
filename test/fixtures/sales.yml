@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  userId: 1
+  desc: MyString
+  value: 9.99
+
+two:
+  userId: 1
+  desc: MyString
+  value: 9.99

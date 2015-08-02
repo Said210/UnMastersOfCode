@@ -29,6 +29,13 @@
 				<p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en" target="_blank">Learn More</a></p>
 			
 		</div>
+        <hr>
+        <h1>List</h1>
+        <% @data.shopping_cart.shoppingCartItem.each do |item| %>
+            <b><%= item.description %></b> - <i><%= item.value %>$</i>
+        <% end %>
+        
+        <hr>
 		<div>
     	<fieldset>
     		<legend>Javascript</legend>
