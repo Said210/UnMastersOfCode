@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  #devise_for :users
-
   resources :usuario_sitios
 
   resources :sitios
@@ -8,6 +6,8 @@ Rails.application.routes.draw do
   resources :usuario_gustos
 
   resources :cat_gustos
+
+  devise_for :users
 
   root "test#index"
   get "oauth" => "test#oauth"
