@@ -7,14 +7,9 @@
 	<h1>This is the Home Page</h1>
 
 	<form action="/oauth" method="GET">
-		<input type="text" name="desc" placeholder="Donde Se gasto">
+		<input type="text" name="desc" placeholder="Donde Estas">
 		<input type="text" name="value" placeholder="Precio">
 		<input type="submit" value="Enviar">
 	</form>
-	<p>
-		This is the response
-		<br>
-		<%= @data.to_yaml %>
-	</p>	
 </body>
 </html>

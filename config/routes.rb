@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root "test#index"
+
   get "oauth" => "test#oauth"
   post "shoppingcart" => "test#shopping_cart"
   get "cartcallback" => "test#cart_callback"
