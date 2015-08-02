@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UN</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+    
+<div class="container min-h back-body">
+    <div class="row">
+    <div class="col-xs-6">
+        <h1>My trip</h1>
+    </div>
+    </div>
+    <br>
+    <div class="row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3 text-left">
+        <h2>My trip to Mexico:</h2>
+    </div>
+    </div>
+    <% @places.each do |place| %>
+    <option value="<%= place.nombre %>"><%= place.nombre %></option>
+    <div class="row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-1 text-right">
+        <img src="img/pin.png" class="cajafooter">
+    </div>
+    <div class="col-xs-2 text-left">
+        <p><strong><%= place.nombre %></strong></p>
+    </div>
+    <div class="col-xs-2">
+        <a href=""><img src="img/masterpass.png" ></a>
+    </div>
+    <br>
+    </div>
+    <% end %>      
+</div>
+  <footer>
+    <div class="container">
+        <div class="ali-reg">
+            <div class="boton-suerte">
+            <a><img src="img/UNetiqueta.png"></a>
+            </div>
+        </div>
+    </div>
+  </footer>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
