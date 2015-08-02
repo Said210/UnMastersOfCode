@@ -6800,4 +6800,18 @@ button.close {
     display: none !important;
   }
 }
+
+
+    @font-face{
+      font-family: "MiFuente";
+      src: url("../fonts/AlegreyaSans-Light.ttf");
+    }
+    body {
+      font-family: "MiFuente";
+    }
+
+.glyphicon {
+
+  font-family: 'Glyphicons Halflings' !important;
+}
 /*# sourceMappingURL=bootstrap.css.map */

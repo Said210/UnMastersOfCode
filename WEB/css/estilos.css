@@ -88,9 +88,15 @@ margin-bottom: 15px;
 
 #map-canvas {
  width: 100%;
- height: 540px;
+ height: 480px;
 }
 
-.h1{
-    color: ;
+.cajafooter{
+    width: 60px;
+    height: 60px;
+}
+
+.min-h{
+    min-height: 570px;
+    padding-top: 7%;
 }
