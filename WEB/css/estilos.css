@@ -73,6 +73,10 @@ input{
     margin: 5px;
     width: 9%;
 }
+.boton-felling2{
+    display: inline-block;
+    margin: 5px;
+}
 .logo_abajo img{
     height: 80px;
     margin-top: 35px;
