@@ -1,0 +1,31 @@
+<h1>Listing usuario_sitios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Idusuariositio</th>
+      <th>Idusuarios</th>
+      <th>Idsitiou</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuario_sitios.each do |usuario_sitio| %>
+      <tr>
+        <td><%= usuario_sitio.idUsuarioSitio %></td>
+        <td><%= usuario_sitio.idUsuarioS %></td>
+        <td><%= usuario_sitio.idSitioU %></td>
+        <td><%= link_to 'Show', usuario_sitio %></td>
+        <td><%= link_to 'Edit', edit_usuario_sitio_path(usuario_sitio) %></td>
+        <td><%= link_to 'Destroy', usuario_sitio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usuario sitio', new_usuario_sitio_path %>

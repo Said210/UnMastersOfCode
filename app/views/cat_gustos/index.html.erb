@@ -1,0 +1,29 @@
+<h1>Listing cat_gustos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Idgusto</th>
+      <th>Gusto</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cat_gustos.each do |cat_gusto| %>
+      <tr>
+        <td><%= cat_gusto.idGusto %></td>
+        <td><%= cat_gusto.gusto %></td>
+        <td><%= link_to 'Show', cat_gusto %></td>
+        <td><%= link_to 'Edit', edit_cat_gusto_path(cat_gusto) %></td>
+        <td><%= link_to 'Destroy', cat_gusto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cat gusto', new_cat_gusto_path %>

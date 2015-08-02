@@ -1,0 +1,35 @@
+<h1>Listing sitios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Idsitio</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Nombre</th>
+      <th>Fecha</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sitios.each do |sitio| %>
+      <tr>
+        <td><%= sitio.idSitio %></td>
+        <td><%= sitio.latitude %></td>
+        <td><%= sitio.longitude %></td>
+        <td><%= sitio.nombre %></td>
+        <td><%= sitio.fecha %></td>
+        <td><%= link_to 'Show', sitio %></td>
+        <td><%= link_to 'Edit', edit_sitio_path(sitio) %></td>
+        <td><%= link_to 'Destroy', sitio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sitio', new_sitio_path %>

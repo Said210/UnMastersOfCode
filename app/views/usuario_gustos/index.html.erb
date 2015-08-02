@@ -1,0 +1,31 @@
+<h1>Listing usuario_gustos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Idusuariogusto</th>
+      <th>Idgustou</th>
+      <th>Idusuariog</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuario_gustos.each do |usuario_gusto| %>
+      <tr>
+        <td><%= usuario_gusto.idUsuarioGusto %></td>
+        <td><%= usuario_gusto.idGustoU %></td>
+        <td><%= usuario_gusto.idUsuarioG %></td>
+        <td><%= link_to 'Show', usuario_gusto %></td>
+        <td><%= link_to 'Edit', edit_usuario_gusto_path(usuario_gusto) %></td>
+        <td><%= link_to 'Destroy', usuario_gusto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usuario gusto', new_usuario_gusto_path %>

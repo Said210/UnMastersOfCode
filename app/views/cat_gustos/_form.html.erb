@@ -1,0 +1,25 @@
+<%= form_for(@cat_gusto) do |f| %>
+  <% if @cat_gusto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cat_gusto.errors.count, "error") %> prohibited this cat_gusto from being saved:</h2>
+
+      <ul>
+      <% @cat_gusto.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :idGusto %><br>
+    <%= f.number_field :idGusto %>
+  </div>
+  <div class="field">
+    <%= f.label :gusto %><br>
+    <%= f.text_area :gusto %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
