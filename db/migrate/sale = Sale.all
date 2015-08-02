@@ -1,0 +1,14 @@
+sale = Sale.all
+s = Hash.new
+sale.each do |sl|
+	if	s[sl.userId].nil?
+		s[sl.userId] = Hash.new
+		s[sl.userId][sl.desc] = 1
+	else
+		begin
+			s[sl.userId][sl.desc]++
+		rescue
+			s[sl.userId] << [sl.desc]
+		end
+	end
+end

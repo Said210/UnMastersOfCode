@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   root "test#index"
 
   get "oauth" => "test#oauth"
+  get "feelingLucky" => "test#feeling_lucky"
   post "shoppingcart" => "test#shopping_cart"
   get "cartcallback" => "test#cart_callback"
   get "pay" => "test#pay", as: :dashboard

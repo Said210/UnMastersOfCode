@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802103301) do
+ActiveRecord::Schema.define(version: 20150802154835) do
 
   create_table "cat_gustos", force: :cascade do |t|
     t.integer  "idGusto"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20150802103301) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "nombre"
-    t.datetime "fecha"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

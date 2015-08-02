@@ -11,11 +11,13 @@ class TestController < ApplicationController
 	end
 
 	def pay
+		@places = Sitio.all
 	end
 
 	def generate_private_key
 		OpenSSL::PKCS12.new(File.open(@data.keystore_path),@data.keystore_password).key
 	end
+	
 	def oauth
 		@data.xml_version = "v6"
 		@data.shipping_suppression = false
@@ -35,6 +37,28 @@ class TestController < ApplicationController
 	    	s.save
 	    end
 	end
+
+	def feeling_lucky
+		@data.xml_version = "v6"
+		@data.shipping_suppression = false
+		@data.rewards = false
+		@data.auth_level_basic = false
+		@data.redirect_shipping_profiles = ""
+		@data.accepted_cards = "master,amex,diners,discover,maestro,visa"
+		get_request_token
+		post_random_shopping_cart
+		@data.shopping_cart.shoppingCartItem.each do |item|
+			Rails.logger.debug item.to_yaml
+			s = Sale.new
+	    	s.desc = item.description
+	    	s.value = item.value
+	    	s.quantity = item.quantity
+	    	s.userId = current_user.id
+	    	s.save
+	    end
+	    render :oauth
+	end	
+
 	def cart_callback
 		
 	 	Rails.logger.debug "\n\n\n----------------------------------"
@@ -83,8 +107,6 @@ class TestController < ApplicationController
 	def post_shopping_cart
 		#Rails.logger.debug "HOLA REQUEST––––––––––––––––––––––––––––––"
 		file = File.read(File.join('resources', 'shoppingCart.xml'))
-
-		Rails.logger.debug file
 		file = '<?xml version="1.0"?>
 					<ShoppingCartRequest>
 					  <OAuthToken></OAuthToken>
@@ -106,7 +128,7 @@ class TestController < ApplicationController
 		@data.shopping_cart = @data.shopping_cart_request.shoppingCart
 		if !params[:desc].nil?
 			@data.shopping_cart.shoppingCartItem[0].description = params[:desc]
-			@data.shopping_cart.shoppingCartItem[0].value = params[:value]
+			@data.shopping_cart.shoppingCartItem[0].value = !params[:value].nil? ? params[:value] : "150"
 		end
 		@data.shopping_cart.shoppingCartItem.each do |i|
 			i.description = i.description[0..99] if i.description.length > 100
@@ -117,9 +139,44 @@ class TestController < ApplicationController
 		@data.shopping_cart_response = ShoppingCartResponse.from_xml(@service.post_shopping_cart_data(@data.shopping_cart_url, @data.shopping_cart_request.to_xml_s)) 
 		
 	end
+
+	def post_random_shopping_cart
+		#Rails.logger.debug "HOLA REQUEST––––––––––––––––––––––––––––––"
+		file = File.read(File.join('resources', 'shoppingCart.xml'))
+		file = '<?xml version="1.0"?>
+					<ShoppingCartRequest>
+					  <OAuthToken></OAuthToken>
+					  <ShoppingCart>
+					    <CurrencyCode>USD</CurrencyCode>
+					    <Subtotal>100</Subtotal>
+					    
+					    <ShoppingCartItem>
+					      <Description>XBox 360</Description>
+					      <Quantity>1</Quantity>
+					      <Value>299</Value>
+					      <ImageURL>http://projectabc.com/images/xbox.jpg</ImageURL>
+					    </ShoppingCartItem>
+					    
+					  </ShoppingCart>
+					</ShoppingCartRequest>
+				'
+		@data.shopping_cart_request = ShoppingCartRequest.from_xml(file)
+		@data.shopping_cart = @data.shopping_cart_request.shoppingCart
+			@data.shopping_cart.shoppingCartItem[0].description = Sitio.find(rand(1..Sitio.all.size)).nombre
+			@data.shopping_cart.shoppingCartItem[0].value = rand(150..1000).to_s
+		@data.shopping_cart.shoppingCartItem.each do |i|
+			i.description = i.description[0..99] if i.description.length > 100
+			i.description = i.description[0..98] if i.description.last == "&"
+		end
+		@data.shopping_cart_request.oAuthToken = @data.request_token
+		@data.shopping_cart_request.originUrl = @data.callback_domain
+		@data.shopping_cart_response = ShoppingCartResponse.from_xml(@service.post_shopping_cart_data(@data.shopping_cart_url, @data.shopping_cart_request.to_xml_s)) 
+		
+	end
+
 	def set_error_message(error)
 		@data.error_message = error.to_s
-		render 
+		render :oauth
 	end
 	def handle_oauth_callback
 		@data.request_token = params['oauth_token']

@@ -13205,3 +13205,70 @@ ActionController::RoutingError (No route matches [GET] "/javascripts/tooltips/co
   Rendered /Users/saidpelaez/.rvm/gems/ruby-2.2.1/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
   Rendered /Users/saidpelaez/.rvm/gems/ruby-2.2.1/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
   Rendered /Users/saidpelaez/.rvm/gems/ruby-2.2.1/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (106.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemoveFechaFromSitios (20150802154835)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemoveFechaFromSitios (20150802154835)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (2.6ms)[0m  [1mCREATE TEMPORARY TABLE "asitios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "idSitio" integer, "latitude" float, "longitude" float, "nombre" varchar, "fecha" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "sitios"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "asitios" ("id","idSitio","latitude","longitude","nombre","fecha","created_at","updated_at") VALUES (1, NULL, 3.0, 4.0, 'Tacos de Mandibulin', '2013-04-06 03:28:00.000000', '2015-08-02 15:46:11.430282', '2015-08-02 15:46:11.430282')[0m
+  [1m[35m (3.1ms)[0m  DROP TABLE "sitios"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "sitios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "idSitio" integer, "latitude" float, "longitude" float, "nombre" varchar, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "asitios"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "sitios" ("id","idSitio","latitude","longitude","nombre","created_at","updated_at") VALUES (1, NULL, 3.0, 4.0, 'Tacos de Mandibulin', '2015-08-02 15:46:11.430282', '2015-08-02 15:46:11.430282')[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "asitios"
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150802154835"]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_updated_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_updated_at' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_sessions_on_session_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_sessions_on_session_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.5ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "sales"[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "sales"
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "sales"[0m
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM "sales"
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "sales"[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "sales"
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "sales"[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "sales"
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "sales"[0m
+  [1m[35mSale Load (0.3ms)[0m  SELECT  "sales".* FROM "sales" WHERE "sales"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mSale Load (3.8ms)[0m  [1mSELECT "sales".* FROM "sales"[0m
+  [1m[35mSale Load (0.6ms)[0m  SELECT "sales".* FROM "sales"
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mSale Load (0.3ms)[0m  SELECT  "sales".* FROM "sales" WHERE "sales"."userId" = ? LIMIT 1  [["userId", 1]]
+  [1m[36mSale Load (0.1ms)[0m  [1mSELECT  "sales".* FROM "sales" WHERE "sales"."userId" = ? LIMIT 1[0m  [["userId", 2]]
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "sales"
+  [1m[36mSale Load (0.9ms)[0m  [1mSELECT "sales".* FROM "sales"[0m
