@@ -68,6 +68,10 @@ margin-bottom: 15px;
 
 
 }
+.boton-felling{
+    display: inline-block;
+    width: 10%;
+}
 @media (min-width: 1200px){
 .reginp{width: 30%;
 }
